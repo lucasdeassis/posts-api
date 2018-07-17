@@ -1,0 +1,20 @@
+{
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "extends": "airbnb",
+  "plugins": [
+    "mocha"
+  ],
+  "rules": {
+    "comma-spacing": [2, { "before": false, "after": true }],
+    "indent": [2, 2],
+    "linebreak-style": [2, "unix"],
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "mocha/no-exclusive-tests": 2,
+    "mocha/no-skipped-tests": 2
+  }
+}
