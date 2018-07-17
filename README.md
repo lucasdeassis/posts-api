@@ -22,10 +22,19 @@ Now you have mongodb running in order to connect using the repository. The API r
 Right after, issue:
 
 ```
-$ node server/server.js
+$ yarn install && yarn start
 ```
 
 Then, you'll see the host and port server message `listening at port http://localhost:8080`
 
 And that's it! consume the API and see the results!
+
+To run tests, type:
+```
+$ yarn test
+```
+
+To run the linter, try `yarn lint`
+
+Check out the example folder at `/example` 
 
