@@ -42,7 +42,12 @@ app.post('/login', async (req, res) => {
 app.post('/create/post', authenticate, async (req, res) => {
   try {
     const body = _.pick(req.body, ['title', 'text']);
-    const post = new Post({ ...body, userFirstName: req.user.firstName  });
+    const post = new Post({
+      ...body,
+      userName: `${req.user.firstName} ${req.user.surname}`,
+      userEmail: req.user.email,
+    });
+
     await post.save();
     res.status(201).send(post);
   } catch(err) {
