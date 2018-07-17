@@ -25,7 +25,7 @@ Right after, issue:
 $ node server/server.js
 ```
 
-Then, you'll see the host and port server message `listening at port http://localhost:3000`
+Then, you'll see the host and port server message `listening at port http://localhost:8080`
 
 And that's it! consume the API and see the results!
 

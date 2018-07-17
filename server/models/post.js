@@ -15,10 +15,15 @@ var Post = mongoose.model('Post', {
     maxlength: 500,
     trim: true,
   },
-  userFirstName: {
+  userName: {
     type: String,
     required: true,
     minlength: 1,
+    trim: true,
+  },
+  userEmail: {
+    type: String,
+    required: true,
     trim: true,
   },
   createdAt: {

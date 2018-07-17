@@ -34,12 +34,14 @@ const posts = [{
   _id: new ObjectID(),
   title: 'First test post',
   text: 'First post text description',
-  userFirstName: userOneFirstName,
+  userName: `${userOneFirstName} kett`,
+  userEmail: 'andrew@example.com',
 }, {
   _id: new ObjectID(),
   title: 'Second test post',
   text: 'Second post text description',
-  userFirstName: userTwoFirstName,
+  userName: `${userTwoFirstName} simons`,
+  userEmail: 'jen@example.com',
   createdAt: new Date('2018-07-17T13:59:32+00:00'),
 } ];
 
