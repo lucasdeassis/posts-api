@@ -27,24 +27,24 @@ var UserSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: validator.isEmail,
-      message: '{VALUE} is not a valid email'
-    }
+      message: '{VALUE} is not a valid email',
+    },
   },
   password: {
     type: String,
     require: true,
-    minlength: 6
+    minlength: 6,
   },
   tokens: [{
     access: {
       type: String,
-      required: true
+      required: true,
     },
     token: {
       type: String,
-      required: true
-    }
-  }]
+      required: true,
+    },
+  }],
 });
 
 UserSchema.methods.toJSON = function () {
@@ -57,9 +57,9 @@ UserSchema.methods.toJSON = function () {
 UserSchema.methods.generateAuthToken = function () {
   var user = this;
   var access = 'auth';
-  var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
+  var token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString();
 
-  user.tokens.push({access, token});
+  user.tokens.push({ access, token });
 
   return user.save().then(() => {
     return token;
@@ -79,14 +79,14 @@ UserSchema.statics.findByToken = function (token) {
   return User.findOne({
     '_id': decoded._id,
     'tokens.token': token,
-    'tokens.access': 'auth'
+    'tokens.access': 'auth',
   });
 };
 
 UserSchema.statics.findByCredentials = function (email, password) {
   var User = this;
 
-  return User.findOne({email}).then((user) => {
+  return User.findOne({ email }).then((user) => {
     if (!user) {
       return Promise.reject();
     }
