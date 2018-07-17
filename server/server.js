@@ -7,14 +7,38 @@ const bodyParser = require('body-parser');
 require('./db/mongoose');
 const { ObjectID } = require('mongodb');
 
-var { User } = require('./models/user');
-var { Post } = require('./models/post');
-var { authenticate } = require('./middleware/authenticate');
+const { User } = require('./models/user');
+const { Post } = require('./models/post');
+const { authenticate } = require('./middleware/authenticate');
 
-var app = express();
+const cors = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth');
+  res.header(
+    'Access-Control-Expose-Headers',
+    'x-auth'
+  );
+
+  next();
+};
+
+const timeLogger = (req, res, next) => {
+  const now = new Date().toString();
+
+  console.log(`${now}: ${req.method} ${req.url}`); // eslint-disable-line no-console
+
+  next();
+};
+
+const app = express();
 const port = process.env.PORT;
 
+app.use(cors);
 app.use(bodyParser.json());
+app.use(timeLogger);
 
 app.post('/register', async (req, res) => {
   try {
