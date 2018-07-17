@@ -1,10 +1,12 @@
+[![Build Status](https://semaphoreci.com/api/v1/lucasdeassis/posts-api/branches/master/badge.svg)](https://semaphoreci.com/lucasdeassis/posts-api)
+
 # NodeJS POSTS API
 
 This is a the Node.js Posts API.
 
 ### Stack
-- NodeJS 8.11
-- ExpressJS 4.16
+- Node.js 8.11
+- Express 4.14
 - Mongoose 5.0
 
 ### How to run
