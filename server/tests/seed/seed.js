@@ -20,7 +20,6 @@ const users = [{
   firstName: 'jen',
   surname: 'simons',
   email: 'jen@example.com',
-  email: 'jen@example.com',
   password: 'userTwoPass',
   tokens: [{
     access: 'auth',
@@ -33,7 +32,7 @@ const populateUsers = (done) => {
     var userOne = new User(users[0]).save();
     var userTwo = new User(users[1]).save();
 
-    return Promise.all([userOne, userTwo])
+    return Promise.all([userOne, userTwo]);
   }).then(() => done());
 };
 

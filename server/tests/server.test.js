@@ -37,7 +37,7 @@ describe('POST /register', () => {
   it('should create a user', (done) => {
     const {
       email, firstName, surname, password
-     } = userFixture;
+    } = userFixture;
 
     request(app)
       .post('/register')
@@ -125,7 +125,7 @@ describe('POST /login', () => {
       .expect((res) => {
         expect(res.headers['x-auth']).to.not.exist;
       })
-      .end((err, res) => {
+      .end((err) => {
         if (err) {
           return done(err);
         }
@@ -144,7 +144,7 @@ describe('DELETE /me/token', () => {
       .delete('/me/token')
       .set('x-auth', users[0].tokens[0].token)
       .expect(200)
-      .end((err, res) => {
+      .end((err) => {
         if (err) {
           return done(err);
         }
