@@ -4,7 +4,10 @@
     "es6": true,
     "mocha": true
   },
-  "extends": "airbnb",
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
   "plugins": [
     "mocha"
   ],
