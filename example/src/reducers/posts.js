@@ -34,22 +34,10 @@ const posts = (state = {
   }
 };
 
-const postsByUser = (state = { }, action) => {
-  switch (action.type) {
-    case RECEIVE_POSTS:
-    case REQUEST_POSTS:
-      return {
-        ...state,
-        [action.email]: posts(state[action.email], action),
-      };
-    default:
-      return state;
-  }
-};
 
-const rootReducer = combineReducers({
-  postsByUser,
+const postsReducer = combineReducers({
+  allPosts: posts,
   selectedPost,
 });
 
-export default rootReducer;
+export default postsReducer;
