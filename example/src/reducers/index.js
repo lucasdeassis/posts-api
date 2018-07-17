@@ -1,38 +1,38 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import {
   SELECT_POST,
-  REQUEST_POSTS, RECEIVE_POSTS
-} from '../actions'
+  REQUEST_POSTS, RECEIVE_POSTS,
+} from '../actions';
 
 const selectedPost = (state = '', action) => {
   switch (action.type) {
     case SELECT_POST:
-      return action.post
+      return action.post;
     default:
-      return state
+      return state;
   }
-}
+};
 
 const posts = (state = {
   isFetching: false,
-  items: []
+  items: [],
 }, action) => {
   switch (action.type) {
     case REQUEST_POSTS:
       return {
         ...state,
         isFetching: true,
-      }
+      };
     case RECEIVE_POSTS:
       return {
         ...state,
         isFetching: false,
         items: action.posts,
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 const postsByUser = (state = { }, action) => {
   switch (action.type) {
@@ -40,16 +40,16 @@ const postsByUser = (state = { }, action) => {
     case REQUEST_POSTS:
       return {
         ...state,
-        [action.email]: posts(state[action.email], action)
-      }
+        [action.email]: posts(state[action.email], action),
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 const rootReducer = combineReducers({
   postsByUser,
-  selectedPost
-})
+  selectedPost,
+});
 
-export default rootReducer
+export default rootReducer;
