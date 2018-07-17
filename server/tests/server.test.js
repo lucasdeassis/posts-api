@@ -146,6 +146,8 @@ describe('POST /create/post', () => {
           expect(posts.length).to.eq(1);
           expect(posts[0].text).to.eq(text);
           expect(posts[0].title).to.eq(title);
+          expect(posts[0].userName).to.eq(`${users[0].firstName} ${users[0].surname}`);
+          expect(posts[0].userEmail).to.eq(users[0].email);
           done();
         }).catch((e) => done(e));
       });
