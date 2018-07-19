@@ -4,6 +4,7 @@ export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SELECT_POST = 'SELECT_POST';
 export const SAVE_POST = 'SAVE_POST';
+export const DELETE_POST = 'DELETE_POST';
 export const SAVE_USER_TOKEN = 'SAVE_USER_TOKEN';
 
 const API_URL = 'http://localhost';
@@ -66,3 +67,9 @@ export const fetchPostsIfNeeded = () => (dispatch, getState) => {
 
   return {};
 };
+
+export const deletePost = id => (dispatch, getState) => axios.delete(
+  `${API_URL}:${API_PORT}/post/${id}`,
+  { headers: { 'x-auth': getState().user.token } }
+)
+  .then(() => dispatch(fetchPosts(getState())));
