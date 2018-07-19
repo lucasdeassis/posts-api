@@ -22,6 +22,12 @@ export const saveUser = (endpoint, user) => dispatch => axios.post(
 )
   .then(response => dispatch(saveUserToken(response.data, response.headers['x-auth'])));
 
+export const savePost = post => axios.post(
+  `${API_URL}:${API_PORT}/create/post`,
+  post
+)
+  .then(response => response.data);
+
 export const selectPost = post => ({
   type: SELECT_POST,
   post,
