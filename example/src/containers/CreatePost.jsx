@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { saveUser } from '../actions';
+import { savePost } from '../actions';
 import validate from '../utils/validate';
 import Input from '../components/Input';
 
-class LoginContainer extends Component {
+class CreatePostContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   }
 
-  handleSubmitLogin = (values, { setSubmitting }) => {
-    const { dispatch, history } = this.props;
+  handleSubmitPost = (values, { setSubmitting }) => {
+    const { history, dispatch } = this.props;
 
-    dispatch(saveUser('login', values))
+    dispatch(savePost(values))
       .then(() => {
         setSubmitting(false);
-        history.push('/create/post');
+        history.push('/posts');
       })
       .catch(() => {
         setSubmitting(false);
@@ -29,15 +29,15 @@ class LoginContainer extends Component {
     return (
       <div>
         <h1>
-          Login
+          Create Post
         </h1>
         <Formik
           initialValues={{
-            email: '',
-            password: '',
+            title: '',
+            text: '',
           }}
-          validate={values => validate('login', values)}
-          onSubmit={this.handleSubmitLogin}
+          validate={values => validate('createPost', values)}
+          onSubmit={this.handleSubmitPost}
           render={({
             errors,
             handleChange,
@@ -46,18 +46,16 @@ class LoginContainer extends Component {
           }) => (
             <form onSubmit={handleSubmit}>
               <Input
-                name="email"
-                label="E-mail"
-                type="email"
-                error={errors.email}
+                name="title"
+                label="Title"
+                error={errors.title}
                 onChange={handleChange}
               />
 
               <Input
-                name="password"
-                label="Password"
-                type="password"
-                error={errors.password}
+                name="text"
+                label="Text"
+                error={errors.text}
                 onChange={handleChange}
               />
 
@@ -72,4 +70,4 @@ class LoginContainer extends Component {
   }
 }
 
-export default connect(null)(LoginContainer);
+export default connect(null)(CreatePostContainer);

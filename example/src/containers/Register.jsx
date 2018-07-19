@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { saveUser } from '../actions';
 import validate from '../utils/validate';
+import Input from '../components/Input';
 
 class RegisterContainer extends Component {
   static propTypes = {
@@ -17,7 +18,7 @@ class RegisterContainer extends Component {
     dispatch(saveUser('register', values))
       .then(() => {
         setSubmitting(false);
-        history.push('/posts');
+        history.push('/create/post');
       })
       .catch(() => {
         setSubmitting(false);
@@ -34,8 +35,10 @@ class RegisterContainer extends Component {
           initialValues={{
             email: '',
             password: '',
+            firstName: '',
+            surname: '',
           }}
-          validate={validate}
+          validate={values => validate('register', values)}
           onSubmit={this.handleSubmitRegister}
           render={({
             errors,
@@ -44,45 +47,35 @@ class RegisterContainer extends Component {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit}>
-              <label htmlFor="email">
-                <span>
-                  E-mail:
-                </span>
-                <input name="email" type="email" onChange={handleChange} />
-              </label>
-              <div>
-                {errors.email}
-              </div>
+              <Input
+                name="email"
+                label="E-mail"
+                type="email"
+                error={errors.email}
+                onChange={handleChange}
+              />
 
-              <label htmlFor="firstName">
-                <span>
-                  First Name:
-                </span>
-                <input name="firstName" type="text" onChange={handleChange} />
-              </label>
-              <div>
-                {errors.firstName}
-              </div>
+              <Input
+                name="firstName"
+                label="First Name"
+                error={errors.firstName}
+                onChange={handleChange}
+              />
 
-              <label htmlFor="firstName">
-                <span>
-                  Surname:
-                </span>
-                <input name="surname" type="text" onChange={handleChange} />
-              </label>
-              <div>
-                {errors.surname}
-              </div>
+              <Input
+                name="surname"
+                label="Surname"
+                error={errors.surname}
+                onChange={handleChange}
+              />
 
-              <label htmlFor="password">
-                <span>
-                  Password:
-                </span>
-                <input name="password" type="password" onChange={handleChange} />
-              </label>
-              <div>
-                {errors.password}
-              </div>
+              <Input
+                name="password"
+                label="Password"
+                type="password"
+                error={errors.password}
+                onChange={handleChange}
+              />
 
               <button type="submit" disabled={isSubmitting}>
                 Submit
