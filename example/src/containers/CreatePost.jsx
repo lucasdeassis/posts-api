@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { saveUser } from '../actions';
+import { savePost } from '../actions';
 import validate from '../utils/validate';
 import Input from '../components/Input';
 
-class RegisterContainer extends Component {
+class CreatePostContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   }
 
-  handleSubmitRegister = (values, { setSubmitting }) => {
+  handleSubmitLogin = (values, { setSubmitting }) => {
     const { dispatch, history } = this.props;
 
-    dispatch(saveUser('register', values))
+    dispatch(savePost(values))
       .then(() => {
         setSubmitting(false);
-        history.push('/create/post');
+        history.push('/posts');
       })
       .catch(() => {
         setSubmitting(false);
@@ -29,17 +29,15 @@ class RegisterContainer extends Component {
     return (
       <div>
         <h1>
-          Register
+          Create Post
         </h1>
         <Formik
           initialValues={{
-            email: '',
-            password: '',
-            firstName: '',
-            surname: '',
+            title: '',
+            text: '',
           }}
-          validate={values => validate('register', values)}
-          onSubmit={this.handleSubmitRegister}
+          validate={values => validate('createPost', values)}
+          onSubmit={this.handleSubmitLogin}
           render={({
             errors,
             handleChange,
@@ -48,32 +46,16 @@ class RegisterContainer extends Component {
           }) => (
             <form onSubmit={handleSubmit}>
               <Input
-                name="email"
-                label="E-mail"
-                type="email"
-                error={errors.email}
+                name="title"
+                label="Title"
+                error={errors.title}
                 onChange={handleChange}
               />
 
               <Input
-                name="firstName"
-                label="First Name"
-                error={errors.firstName}
-                onChange={handleChange}
-              />
-
-              <Input
-                name="surname"
-                label="Surname"
-                error={errors.surname}
-                onChange={handleChange}
-              />
-
-              <Input
-                name="password"
-                label="Password"
-                type="password"
-                error={errors.password}
+                name="text"
+                label="Text"
+                error={errors.text}
                 onChange={handleChange}
               />
 
@@ -88,4 +70,4 @@ class RegisterContainer extends Component {
   }
 }
 
-export default connect(null)(RegisterContainer);
+export default connect(null)(CreatePostContainer);

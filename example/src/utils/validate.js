@@ -1,5 +1,5 @@
 import spected from 'spected';
-import getValidationSchema from './getValidationSchema';
+import * as validationSchemas from './getValidationSchema';
 
 const getErrorsFromValidationResult = (validationResult) => {
   const FIRST_ERROR = 0;
@@ -13,8 +13,8 @@ const getErrorsFromValidationResult = (validationResult) => {
   );
 };
 
-export default (values) => {
-  const spec = getValidationSchema(values);
+export default (form, values) => {
+  const spec = validationSchemas[form](values);
   const validationResult = spected(spec, values);
   return getErrorsFromValidationResult(validationResult);
 };

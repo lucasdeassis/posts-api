@@ -36,7 +36,7 @@ class LoginContainer extends Component {
             email: '',
             password: '',
           }}
-          validate={validate}
+          validate={values => validate('login', values)}
           onSubmit={this.handleSubmitLogin}
           render={({
             errors,
