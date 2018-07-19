@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPostsIfNeeded } from '../actions';
+import { fetchPostsIfNeeded, deletePost } from '../actions';
 import Posts from '../components/Posts';
 
 class PostsContainer extends Component {
   static propTypes = {
-    selectedPost: PropTypes.string.isRequired,
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
     isFetching: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   }
 
   componentDidMount() {
-    const { dispatch, selectedPost } = this.props;
-    dispatch(fetchPostsIfNeeded(selectedPost));
+    const { dispatch } = this.props;
+    dispatch(fetchPostsIfNeeded());
+  }
+
+  onPostDelete = (id) => {
+    const { dispatch } = this.props;
+
+    dispatch(deletePost(id));
   }
 
   render() {
@@ -41,7 +46,7 @@ class PostsContainer extends Component {
 
     return (
       <div>
-        <Posts posts={posts} />
+        <Posts posts={posts} deletePost={this.onPostDelete} />
       </div>
     );
   }
@@ -50,7 +55,6 @@ class PostsContainer extends Component {
 const mapStateToProps = (state) => {
   const {
     posts: {
-      selectedPost,
       allPosts,
     },
   } = state;
@@ -64,7 +68,6 @@ const mapStateToProps = (state) => {
   };
 
   return {
-    selectedPost,
     posts,
     isFetching,
   };
