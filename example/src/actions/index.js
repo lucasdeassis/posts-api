@@ -3,6 +3,7 @@ import axios from 'axios';
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SELECT_POST = 'SELECT_POST';
+export const SAVE_POST = 'SAVE_POST';
 export const SAVE_USER_TOKEN = 'SAVE_USER_TOKEN';
 
 const API_URL = 'http://localhost';
@@ -22,11 +23,15 @@ export const saveUser = (endpoint, user) => dispatch => axios.post(
 )
   .then(response => dispatch(saveUserToken(response.data, response.headers['x-auth'])));
 
-export const savePost = post => axios.post(
+export const savePost = post => (dispatch, getState) => axios.post(
   `${API_URL}:${API_PORT}/create/post`,
-  post
+  post,
+  { headers: { 'x-auth': getState().user.token } }
 )
-  .then(response => response.data);
+  .then(({ data }) => ({
+    type: SAVE_POST,
+    post: data
+  }));
 
 export const selectPost = post => ({
   type: SELECT_POST,

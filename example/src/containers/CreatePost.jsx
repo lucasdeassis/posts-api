@@ -12,8 +12,8 @@ class CreatePostContainer extends Component {
     history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   }
 
-  handleSubmitLogin = (values, { setSubmitting }) => {
-    const { dispatch, history } = this.props;
+  handleSubmitPost = (values, { setSubmitting }) => {
+    const { history, dispatch } = this.props;
 
     dispatch(savePost(values))
       .then(() => {
@@ -37,7 +37,7 @@ class CreatePostContainer extends Component {
             text: '',
           }}
           validate={values => validate('createPost', values)}
-          onSubmit={this.handleSubmitLogin}
+          onSubmit={this.handleSubmitPost}
           render={({
             errors,
             handleChange,
