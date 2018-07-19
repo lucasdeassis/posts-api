@@ -5,21 +5,19 @@ const Posts = ({ posts }) => (
   <ul>
     {posts.map(post => (
       <li key={post._id}>
-        <li>
-          {post.title}
-        </li>
+        {`Title: ${post.title}`}
         <ul>
           <li>
-            {`(${post.text})`}
+            {`Text: ${post.text}`}
           </li>
           <li>
-            {`user: ${post.userName}`}
+            {`User: ${post.userName}`}
           </li>
           <li>
-            {`email: ${post.userEmail}`}
+            {`E-mail: ${post.userEmail}`}
           </li>
           <li>
-            {`createdAt: ${new Date(post.createdAt).toLocaleString()}`}
+            {`Created At: ${new Date(post.createdAt).toLocaleString()}`}
           </li>
         </ul>
       </li>

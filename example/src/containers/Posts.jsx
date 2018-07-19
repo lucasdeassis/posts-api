@@ -41,9 +41,7 @@ class PostsContainer extends Component {
 
     return (
       <div>
-        <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-          <Posts posts={posts} />
-        </div>
+        <Posts posts={posts} />
       </div>
     );
   }
