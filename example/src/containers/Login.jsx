@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { saveUser } from '../actions';
 import validate from '../utils/validate';
+import Input from '../components/Input';
 
 class LoginContainer extends Component {
   static propTypes = {
@@ -17,7 +18,7 @@ class LoginContainer extends Component {
     dispatch(saveUser('login', values))
       .then(() => {
         setSubmitting(false);
-        history.push('/posts');
+        history.push('/create/post');
       })
       .catch(() => {
         setSubmitting(false);
@@ -44,25 +45,21 @@ class LoginContainer extends Component {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit}>
-              <label htmlFor="email">
-                <span>
-                E-mail:
-                </span>
-                <input name="email" type="email" onChange={handleChange} />
-              </label>
-              <div>
-                {errors.email}
-              </div>
+              <Input
+                name="email"
+                label="E-mail"
+                type="email"
+                error={errors.email}
+                onChange={handleChange}
+              />
 
-              <label htmlFor="password">
-                <span>
-                  Password:
-                </span>
-                <input name="password" type="password" onChange={handleChange} />
-              </label>
-              <div>
-                {errors.password}
-              </div>
+              <Input
+                name="password"
+                label="Password"
+                type="password"
+                error={errors.password}
+                onChange={handleChange}
+              />
 
               <button type="submit" disabled={isSubmitting}>
                 Submit
