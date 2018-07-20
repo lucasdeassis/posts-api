@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   SELECT_POST,
-  REQUEST_POSTS, RECEIVE_POSTS, DELETE_POST,
+  REQUEST_POSTS, RECEIVE_POSTS, DELETE_POST, SAVE_POST,
 } from '../actions';
 
 const sliceItems = (state, action) => {
@@ -37,6 +37,14 @@ const posts = (state = {
         ...state,
         isFetching: false,
         items: action.posts,
+      };
+    case SAVE_POST:
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          action.post
+        ]
       };
     case DELETE_POST:
       return {
