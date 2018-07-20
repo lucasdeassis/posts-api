@@ -74,5 +74,5 @@ export const deletePost = id => (dispatch, getState) => axios.delete(
 )
   .then(({ data }) => dispatch({
     type: DELETE_POST,
-    post: data
+    post: data.post
   }));

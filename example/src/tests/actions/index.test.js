@@ -72,12 +72,12 @@ describe('async actions', () => {
   });
 
   it('creates DELETE_POST when delete post has been done sucessfully', async () => {
-    const mockPost = { title: 'foo', text: 'bar' };
+    const mockPost = { post: { title: 'foo', text: 'bar' } };
 
     mockAxios.delete.mockImplementationOnce(() => Promise.resolve({ data: mockPost }));
 
     const expectedActions = [
-      { type: actions.DELETE_POST, post: mockPost },
+      { type: actions.DELETE_POST, post: mockPost.post },
     ];
 
     const store = mockStore({
