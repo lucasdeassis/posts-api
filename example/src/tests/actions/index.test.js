@@ -46,13 +46,13 @@ describe('async actions', () => {
 
     const store = mockStore({ });
 
-    await store.dispatch(actions.fetchPosts({user}));
+    await store.dispatch(actions.fetchPosts({ user }));
 
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('creates SAVE_POST when save post has been done sucessfully', async () => {
-    const mockPost = { title: 'foo', text: 'bar'};
+    const mockPost = { title: 'foo', text: 'bar' };
 
     mockAxios.post.mockImplementationOnce(() => Promise.resolve({ data: mockPost }));
 
@@ -60,9 +60,11 @@ describe('async actions', () => {
       { type: actions.SAVE_POST, post: mockPost },
     ];
 
-    const store = mockStore({ user: {
-      token: '2432rdqat34532edft423re2'
-    }});
+    const store = mockStore({
+      user: {
+        token: '2432rdqat34532edft423re2'
+      }
+    });
 
     await store.dispatch(actions.savePost(mockPost));
 
@@ -70,7 +72,7 @@ describe('async actions', () => {
   });
 
   it('creates DELETE_POST when delete post has been done sucessfully', async () => {
-    const mockPost = { title: 'foo', text: 'bar'};
+    const mockPost = { title: 'foo', text: 'bar' };
 
     mockAxios.delete.mockImplementationOnce(() => Promise.resolve({ data: mockPost }));
 
@@ -78,9 +80,11 @@ describe('async actions', () => {
       { type: actions.DELETE_POST, post: mockPost },
     ];
 
-    const store = mockStore({ user: {
-      token: '2432rdqat34532edft423re2'
-    }});
+    const store = mockStore({
+      user: {
+        token: '2432rdqat34532edft423re2'
+      }
+    });
 
     await store.dispatch(actions.deletePost(mockPost));
 
