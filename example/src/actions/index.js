@@ -22,14 +22,14 @@ export const saveUser = (endpoint, user) => dispatch => axios.post(
   `${API_URL}:${API_PORT}/${endpoint}`,
   user
 )
-  .then(response => dispatch(saveUserToken(response.data, response.headers['x-auth'])));
+  .then(({ data, headers }) => dispatch(saveUserToken(data, headers['x-auth'])));
 
 export const savePost = post => (dispatch, getState) => axios.post(
   `${API_URL}:${API_PORT}/create/post`,
   post,
   { headers: { 'x-auth': getState().user.token } }
 )
-  .then(({ data }) => ({
+  .then(({ data }) => dispatch({
     type: SAVE_POST,
     post: data
   }));
@@ -48,7 +48,7 @@ export const receivePosts = posts => ({
   posts,
 });
 
-const fetchPosts = ({ user }) => (dispatch) => {
+export const fetchPosts = ({ user }) => (dispatch) => {
   dispatch(requestPosts());
   return axios.get(`${API_URL}:${API_PORT}/posts`, { headers: { 'x-auth': user.token } })
     .then(({ data }) => dispatch(receivePosts(data.posts)));
@@ -72,4 +72,7 @@ export const deletePost = id => (dispatch, getState) => axios.delete(
   `${API_URL}:${API_PORT}/post/${id}`,
   { headers: { 'x-auth': getState().user.token } }
 )
-  .then(() => dispatch(fetchPosts(getState())));
+  .then(({ data }) => dispatch({
+    type: DELETE_POST,
+    post: data.post
+  }));

@@ -1,0 +1,18 @@
+[
+  {
+      "_id": "5b503aee3590d54caeec8078",
+      "title": "test post",
+      "text": "hello",
+      "userName": "Lucas de Assis Rosa",
+      "userEmail": "lucasassis413@gmail.com",
+      "createdAt": "2018-07-19T07:17:02.154Z"
+  },
+  {
+      "_id": "5b503b143590d54caeec807b",
+      "title": "my first post",
+      "text": "I like",
+      "userName": "James Cameron",
+      "userEmail": "jamescameron12@hotmail.com",
+      "createdAt": "2018-07-19T07:17:40.156Z"
+  }
+]

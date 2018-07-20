@@ -1,8 +1,17 @@
 import { combineReducers } from 'redux';
 import {
   SELECT_POST,
-  REQUEST_POSTS, RECEIVE_POSTS,
+  REQUEST_POSTS, RECEIVE_POSTS, DELETE_POST, SAVE_POST,
 } from '../actions';
+
+const sliceItems = (state, action) => {
+  const postIndex = state.findIndex(post => post._id === action.post._id);
+
+  return [
+    ...state.slice(0, postIndex),
+    ...state.slice(postIndex + 1),
+  ];
+};
 
 const selectedPost = (state = '', action) => {
   switch (action.type) {
@@ -28,6 +37,19 @@ const posts = (state = {
         ...state,
         isFetching: false,
         items: action.posts,
+      };
+    case SAVE_POST:
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          action.post
+        ]
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        items: sliceItems(state.items, action),
       };
     default:
       return state;
